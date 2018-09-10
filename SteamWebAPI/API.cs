@@ -29,7 +29,7 @@ namespace SteamWebAPI
 		private readonly string APIKey;
 		private readonly string language;
 		private readonly HttpClient apiClient = new HttpClient() { BaseAddress = new Uri("http://api.steampowered.com/") };
-		private readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings()
+		internal static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings()
 		{
 			MissingMemberHandling = MissingMemberHandling.Error
 		};

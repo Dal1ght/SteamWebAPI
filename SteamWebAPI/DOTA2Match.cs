@@ -1,27 +1,33 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SteamWebAPI.Models;
 
 namespace SteamWebAPI
 {
 	public static class DOTA2Match
 	{
 		/// <summary>
-		/// 
+		/// Information about DotaTV-supported leagues.
+		/// <see cref="https://wiki.teamfortress.com/wiki/WebAPI/GetLeagueListing"/>
 		/// </summary>
-		public static async void GetLeagueListing()
+		public static async Task<List<LeagueModel>> GetLeagueListing()
 		{
 			var query = new NameValueCollection();
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Match_570", "GetLeagueListing", 1, query);
+			return JsonConvert.DeserializeObject<List<LeagueModel>>(response["result"]["leagues"].ToString(), API.SerializerSettings);
 		}
 
 		/// <summary>
-		/// 
+		/// A list of in-progress league matches, as well as details of that match as it unfolds.
 		/// </summary>
 		/// <param name="LeagueId">Only show matches of the specified league id</param>
 		/// <param name="MatchId">Only show matches of the specified match id</param>
-		public static async void GetLiveLeagueGames(uint? LeagueId = null, ulong? MatchId = null)
+		public static async Task<List<LiveLeagueGameModel>> GetLiveLeagueGames(uint? LeagueId = null, ulong? MatchId = null)
 		{
 			var query = new NameValueCollection();
 			if (LeagueId != null)
@@ -29,24 +35,28 @@ namespace SteamWebAPI
 			if (MatchId != null)
 				query["match_id"] = MatchId.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Match_570", "GetLiveLeagueGames", 1, query);
+			return JsonConvert.DeserializeObject<List<LiveLeagueGameModel>>(response["result"]["games"].ToString(), API.SerializerSettings);
 		}
 
 		/// <summary>
-		/// 
+		/// Information about a particular match.
+		/// <see cref="https://wiki.teamfortress.com/wiki/WebAPI/GetMatchDetails"/>
 		/// </summary>
 		/// <param name="MatchId">Match id</param>
 		/// <param name="IncludePersonaNames">Include persona names as part of the response</param>
-		public static async void GetMatchDetails(ulong MatchId, bool? IncludePersonaNames = null)
+		public static async Task<DetailedMatchModel> GetMatchDetails(ulong MatchId, bool? IncludePersonaNames = null)
 		{
 			var query = new NameValueCollection();
 			query["match_id"] = MatchId.ToString();
 			if (IncludePersonaNames != null)
 				query["include_persona_names"] = IncludePersonaNames.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Match_570", "GetMatchDetails", 1, query);
+			return JsonConvert.DeserializeObject<DetailedMatchModel>(response["result"].ToString(), API.SerializerSettings);
 		}
 
 		/// <summary>
-		/// 
+		/// A list of matches, filterable by various parameters.
+		/// <see cref="https://wiki.teamfortress.com/wiki/WebAPI/GetMatchHistory"/>
 		/// </summary>
 		/// <param name="HeroId">The ID of the hero that must be in the matches being queried</param>
 		/// <param name="GameMode">Which game mode to return matches for</param>
@@ -56,7 +66,7 @@ namespace SteamWebAPI
 		/// <param name="LeagueId">The league ID to return games from</param>
 		/// <param name="StartAtMatchId">The minimum match ID to start from</param>
 		/// <param name="MatchesRequested">The number of requested matches to return</param>
-		public static async void GetMatchHistory(uint? HeroId = null, uint? GameMode = null, uint? Skill = null, string MinPlayers = null, string AccountId = null, string LeagueId = null, ulong? StartAtMatchId = null, string MatchesRequested = null)
+		public static async Task<MatchHistoryModel> GetMatchHistory(uint? HeroId = null, uint? GameMode = null, uint? Skill = null, string MinPlayers = null, string AccountId = null, string LeagueId = null, ulong? StartAtMatchId = null, string MatchesRequested = null)
 		{
 			var query = new NameValueCollection();
 			if (HeroId != null)
@@ -76,14 +86,15 @@ namespace SteamWebAPI
 			if (MatchesRequested != null)
 				query["matches_requested"] = MatchesRequested;
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Match_570", "GetMatchHistory", 1, query);
+			return JsonConvert.DeserializeObject<MatchHistoryModel>(response["result"].ToString(), API.SerializerSettings);
 		}
 
 		/// <summary>
-		/// 
+		/// A list of matches ordered by their sequence num.
 		/// </summary>
 		/// <param name="StartAtMatchSeqNum"></param>
 		/// <param name="MatchesRequested"></param>
-		public static async void GetMatchHistoryBySequenceNum(ulong? StartAtMatchSeqNum = null, uint? MatchesRequested = null)
+		public static async Task<MatchHistoryModel> GetMatchHistoryBySequenceNum(ulong? StartAtMatchSeqNum = null, uint? MatchesRequested = null)
 		{
 			var query = new NameValueCollection();
 			if (StartAtMatchSeqNum != null)
@@ -91,6 +102,7 @@ namespace SteamWebAPI
 			if (MatchesRequested != null)
 				query["matches_requested"] = MatchesRequested.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Match_570", "GetMatchHistoryBySequenceNum", 1, query);
+			return JsonConvert.DeserializeObject<MatchHistoryModel>(response["result"].ToString(), API.SerializerSettings);
 		}
 
 		/// <summary>

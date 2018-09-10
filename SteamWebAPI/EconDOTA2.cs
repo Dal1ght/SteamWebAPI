@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SteamWebAPI.Models;
 
 namespace SteamWebAPI
 {
@@ -27,27 +31,27 @@ namespace SteamWebAPI
 		/// 
 		/// </summary>
 		/// <param name="Language">The language to provide item names in.</param>
-		public static async void GetGameItems(string Language = null)
+		public static async Task<List<GameItemModel>> GetGameItems(string Language = null)
 		{
 			var query = new NameValueCollection();
 			if (Language != null)
 				query["language"] = Language;
 			JObject response = await API.Instance.GetResponseAsync("IEconDOTA2_570", "GetGameItems", 1, query);
+			return JsonConvert.DeserializeObject<List<GameItemModel>>(response["result"]["items"].ToString(), API.SerializerSettings);
 		}
 
 		/// <summary>
-		/// 
+		/// A list of heroes within Dota 2.
+		/// <see cref="https://wiki.teamfortress.com/wiki/WebAPI/GetHeroes"/>
 		/// </summary>
-		/// <param name="Language">The language to provide hero names in.</param>
 		/// <param name="Itemizedonly">Return a list of itemized heroes only.</param>
-		public static async void GetHeroes(string Language = null, bool? Itemizedonly = null)
+		public static async Task<List<HeroModel>> GetHeroes(bool? Itemizedonly = null)
 		{
 			var query = new NameValueCollection();
-			if (Language != null)
-				query["language"] = Language;
 			if (Itemizedonly != null)
 				query["itemizedonly"] = Itemizedonly.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IEconDOTA2_570", "GetHeroes", 1, query);
+			return JsonConvert.DeserializeObject<List<HeroModel>>(response["result"]["heroes"].ToString(), API.SerializerSettings);
 		}
 
 		/// <summary>
