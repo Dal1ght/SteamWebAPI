@@ -17,7 +17,7 @@ namespace SteamWebAPI
 		/// <param name="Allowedipcountries">comma-separated list of allowed client IP country codes in ISO 3166-1 format - blank for not used</param>
 		public static async void SetClientFilters(string Key, string Cdnname, string Allowedipblocks = null, string Allowedasns = null, string Allowedipcountries = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["cdnname"] = Cdnname;
 			if (Allowedipblocks != null)
@@ -40,7 +40,7 @@ namespace SteamWebAPI
 		/// <param name="CacheHitPercent">Percent cache hits</param>
 		public static async void SetPerformanceStats(string Key, string Cdnname, uint? MbpsSent = null, uint? MbpsRecv = null, uint? CpuPercent = null, uint? CacheHitPercent = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["cdnname"] = Cdnname;
 			if (MbpsSent != null)

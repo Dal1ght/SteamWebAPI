@@ -19,7 +19,7 @@ namespace SteamWebAPI
 		/// <param name="UseAccountids">Boolean, 0 (default): return steamid_from in output, 1: return accountid_from</param>
 		public static async void PollStatus(string Steamid, ulong Umqid, uint Message, uint? Pollid = null, uint? Sectimeout = null, uint? Secidletime = null, uint? UseAccountids = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["steamid"] = Steamid;
 			query["umqid"] = Umqid.ToString();
 			query["message"] = Message.ToString();

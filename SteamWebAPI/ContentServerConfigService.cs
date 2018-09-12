@@ -17,7 +17,7 @@ namespace SteamWebAPI
 		/// <param name="AllowedIpBlocks">comma-separated list of allowed IP address blocks in CIDR format - blank to clear unfilter</param>
 		public static async void SetSteamCacheClientFilters(string Key, uint CacheId, string CacheKey, string ChangeNotes, string AllowedIpBlocks)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["cache_id"] = CacheId.ToString();
 			query["cache_key"] = CacheKey;
@@ -34,7 +34,7 @@ namespace SteamWebAPI
 		/// <param name="CacheKey">Valid current cache API key</param>
 		public static async void GetSteamCacheNodeParams(string Key, uint CacheId, string CacheKey)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["cache_id"] = CacheId.ToString();
 			query["cache_key"] = CacheKey;
@@ -53,7 +53,7 @@ namespace SteamWebAPI
 		/// <param name="CacheHitPercent">Percent cache hits</param>
 		public static async void SetSteamCachePerformanceStats(string Key, uint CacheId, string CacheKey, uint MbpsSent, uint MbpsRecv, uint CpuPercent, uint CacheHitPercent)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["cache_id"] = CacheId.ToString();
 			query["cache_key"] = CacheKey;

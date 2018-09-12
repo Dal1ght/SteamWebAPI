@@ -25,7 +25,7 @@ namespace SteamWebAPI
 		/// <param name="CheatParam2">cheat param 2</param>
 		public static async void ReportCheatData(string Key, ulong Steamid, uint Appid, string Pathandfilename, string Webcheaturl, ulong TimeNow, ulong TimeStarted, ulong TimeStopped, string Cheatname, uint GameProcessId, uint CheatProcessId, ulong CheatParam1, ulong CheatParam2)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			query["appid"] = Appid.ToString();

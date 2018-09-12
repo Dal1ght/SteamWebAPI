@@ -16,7 +16,7 @@ namespace SteamWebAPI
 		/// <param name="ValidBadgeType3">Valid Badge Type 3</param>
 		public static async void ClaimBadgeReward(string BadgeID, uint ValidBadgeType1, uint ValidBadgeType2, uint ValidBadgeType3)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["BadgeID"] = BadgeID;
 			query["ValidBadgeType1"] = ValidBadgeType1.ToString();
 			query["ValidBadgeType2"] = ValidBadgeType2.ToString();
@@ -30,7 +30,7 @@ namespace SteamWebAPI
 		/// <param name="BadgeID">The badge ID</param>
 		public static async void GetSteamIDForBadgeID(string BadgeID)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["BadgeID"] = BadgeID;
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Ticket_570", "GetSteamIDForBadgeID", 1, query);
 		}
@@ -42,7 +42,7 @@ namespace SteamWebAPI
 		/// <param name="BadgeType">Badge Type</param>
 		public static async void SetSteamAccountPurchased(ulong Steamid, uint BadgeType)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["steamid"] = Steamid.ToString();
 			query["BadgeType"] = BadgeType.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Ticket_570", "SetSteamAccountPurchased", 1, query);
@@ -57,7 +57,7 @@ namespace SteamWebAPI
 		/// <param name="ValidBadgeType3">Valid Badge Type 3</param>
 		public static async void SteamAccountValidForBadgeType(ulong Steamid, uint ValidBadgeType1, uint ValidBadgeType2, uint ValidBadgeType3)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["steamid"] = Steamid.ToString();
 			query["ValidBadgeType1"] = ValidBadgeType1.ToString();
 			query["ValidBadgeType2"] = ValidBadgeType2.ToString();

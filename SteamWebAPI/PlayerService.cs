@@ -15,7 +15,7 @@ namespace SteamWebAPI
 		/// <param name="PlaySessions"></param>
 		public static async void RecordOfflinePlaytime(ulong Steamid, string Ticket, object PlaySessions)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["steamid"] = Steamid.ToString();
 			query["ticket"] = Ticket;
 			query["play_sessions"] = PlaySessions.ToString();
@@ -30,7 +30,7 @@ namespace SteamWebAPI
 		/// <param name="Count">The number of games to return (0/unset: all)</param>
 		public static async void GetRecentlyPlayedGames(string Key, ulong Steamid, uint Count)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			query["count"] = Count.ToString();
@@ -47,7 +47,7 @@ namespace SteamWebAPI
 		/// <param name="AppidsFilter">if set, restricts result set to the passed in apps</param>
 		public static async void GetOwnedGames(string Key, ulong Steamid, bool IncludeAppinfo, bool IncludePlayedFreeGames, uint AppidsFilter)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			query["include_appinfo"] = IncludeAppinfo.ToString();
@@ -63,7 +63,7 @@ namespace SteamWebAPI
 		/// <param name="Steamid">The player we're asking about</param>
 		public static async void GetSteamLevel(string Key, ulong Steamid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IPlayerService", "GetSteamLevel", 1, query);
@@ -76,7 +76,7 @@ namespace SteamWebAPI
 		/// <param name="Steamid">The player we're asking about</param>
 		public static async void GetBadges(string Key, ulong Steamid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IPlayerService", "GetBadges", 1, query);
@@ -90,7 +90,7 @@ namespace SteamWebAPI
 		/// <param name="Badgeid">The badge we're asking about</param>
 		public static async void GetCommunityBadgeProgress(string Key, ulong Steamid, int Badgeid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			query["badgeid"] = Badgeid.ToString();
@@ -105,7 +105,7 @@ namespace SteamWebAPI
 		/// <param name="AppidPlaying">The game player is currently playing</param>
 		public static async void IsPlayingSharedGame(string Key, ulong Steamid, uint AppidPlaying)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			query["appid_playing"] = AppidPlaying.ToString();

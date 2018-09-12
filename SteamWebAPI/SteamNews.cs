@@ -16,7 +16,7 @@ namespace SteamWebAPI
 		/// <param name="Count"># of posts to retrieve (default 20)</param>
 		public static async void GetNewsForApp(uint Appid, uint? Maxlength = null, uint? Enddate = null, uint? Count = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["appid"] = Appid.ToString();
 			if (Maxlength != null)
 				query["maxlength"] = Maxlength.ToString();
@@ -37,7 +37,7 @@ namespace SteamWebAPI
 		/// <param name="Feeds">Comma-seperated list of feed names to return news for</param>
 		public static async void GetNewsForApp(uint Appid, uint? Maxlength = null, uint? Enddate = null, uint? Count = null, string Feeds = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["appid"] = Appid.ToString();
 			if (Maxlength != null)
 				query["maxlength"] = Maxlength.ToString();

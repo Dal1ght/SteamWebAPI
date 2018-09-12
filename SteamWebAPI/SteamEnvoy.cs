@@ -12,7 +12,7 @@ namespace SteamWebAPI
 		/// </summary>
 		public static async void PaymentOutReversalNotification()
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			JObject response = await API.Instance.GetResponseAsync("ISteamEnvoy", "PaymentOutReversalNotification", 1, query);
 		}
 	}

@@ -17,7 +17,7 @@ namespace SteamWebAPI
 		/// <param name="Instanceid0">Instance ID of the nth class.</param>
 		public static async void GetAssetClassInfo(uint Appid, uint ClassCount, ulong Classid0, string Language = null, ulong? Instanceid0 = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["appid"] = Appid.ToString();
 			query["class_count"] = ClassCount.ToString();
 			query["classid0"] = Classid0.ToString();
@@ -36,7 +36,7 @@ namespace SteamWebAPI
 		/// <param name="Language">The user's local language</param>
 		public static async void GetAssetPrices(uint Appid, string Currency = null, string Language = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["appid"] = Appid.ToString();
 			if (Currency != null)
 				query["currency"] = Currency;

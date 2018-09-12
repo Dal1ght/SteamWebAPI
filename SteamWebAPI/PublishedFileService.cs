@@ -44,7 +44,7 @@ namespace SteamWebAPI
 		/// <param name="ReturnMetadata">Populate the metadata</param>
 		public static async void QueryFiles(string Key, uint QueryType, uint Page, uint CreatorAppid, uint Appid, string Requiredtags, string Excludedtags, string RequiredFlags, string OmittedFlags, string SearchText, uint Filetype, ulong ChildPublishedfileid, uint Days, bool IncludeRecentVotesOnly, object RequiredKvTags, bool Totalonly, bool IdsOnly, bool ReturnVoteData, bool ReturnTags, bool ReturnKvTags, bool ReturnPreviews, bool ReturnChildren, bool ReturnShortDescription, bool ReturnForSaleData, uint ReturnPlaytimeStats, bool ReturnDetails, bool StripDescriptionBbcode, uint? Numperpage = null, bool? MatchAllTags = null, uint? CacheMaxAgeSeconds = null, int? Language = null, bool? ReturnMetadata = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["query_type"] = QueryType.ToString();
 			query["page"] = Page.ToString();
@@ -104,7 +104,7 @@ namespace SteamWebAPI
 		/// <param name="Language">Specifies the localized text to return. Defaults to English.</param>
 		public static async void GetDetails(string Key, ulong Publishedfileids, bool Includetags, bool Includeadditionalpreviews, bool Includechildren, bool Includekvtags, bool Includevotes, bool ShortDescription, bool Includeforsaledata, bool Includemetadata, uint ReturnPlaytimeStats, uint Appid, bool StripDescriptionBbcode, int? Language = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["publishedfileids"] = Publishedfileids.ToString();
 			query["includetags"] = Includetags.ToString();
@@ -156,7 +156,7 @@ namespace SteamWebAPI
 		/// <param name="ReturnMetadata">Populate the metadata field</param>
 		public static async void GetUserFiles(string Key, ulong Steamid, uint Appid, uint Privacy, string Requiredtags, string Excludedtags, object RequiredKvTags, uint Filetype, uint CreatorAppid, string MatchCloudFilename, bool Totalonly, bool IdsOnly, bool ReturnTags, bool ReturnPreviews, bool ReturnChildren, bool ReturnForSaleData, uint ReturnPlaytimeStats, bool StripDescriptionBbcode, uint? Page = null, uint? Numperpage = null, string Type = null, string Sortmethod = null, uint? CacheMaxAgeSeconds = null, int? Language = null, bool? ReturnVoteData = null, bool? ReturnKvTags = null, bool? ReturnShortDescription = null, bool? ReturnMetadata = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			query["appid"] = Appid.ToString();

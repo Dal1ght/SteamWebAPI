@@ -4,6 +4,7 @@ using System;
 using System.Collections.Specialized;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SteamWebAPI
 {
@@ -43,11 +44,11 @@ namespace SteamWebAPI
 		public async Task<JObject> GetResponseAsync(string interfaceName, string methodName, int version = 1, NameValueCollection reqParams = null)
 		{
 			if (reqParams == null)
-				reqParams = new NameValueCollection();
+				reqParams = HttpUtility.ParseQueryString("");
 			reqParams["key"] = APIKey;
 			reqParams["language"] = language;
 
-			string query = $"{interfaceName}/{methodName}/v{version}?{reqParams}";
+			string query = $"{interfaceName}/{methodName}/v{version}?{reqParams.ToString()}";
 			var response = await apiClient.GetAsync(query);
 			if (response.IsSuccessStatusCode)
 			{

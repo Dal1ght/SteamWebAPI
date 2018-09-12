@@ -22,7 +22,7 @@ namespace SteamWebAPI
 		/// <param name="MaxResults">Number of results to return at a time.  Default 10k, max 50k.</param>
 		public static async void GetAppList(string Key, uint? IfModifiedSince = null, string HaveDescriptionLanguage = null, bool? IncludeGames = null, bool? IncludeDlc = null, bool? IncludeSoftware = null, bool? IncludeVideos = null, bool? IncludeHardware = null, uint? LastAppid = null, uint? MaxResults = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			if (IfModifiedSince != null)
 				query["if_modified_since"] = IfModifiedSince.ToString();

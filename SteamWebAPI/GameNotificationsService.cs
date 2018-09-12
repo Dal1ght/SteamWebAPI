@@ -17,7 +17,7 @@ namespace SteamWebAPI
 		/// <param name="Steamid">(Optional) steamid to make the request on behalf of -- if specified, the user must be in the session and all users being added to the session must be friends with the user.</param>
 		public static async void UserCreateSession(uint Appid, ulong Context, object Title, object Users, ulong Steamid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["appid"] = Appid.ToString();
 			query["context"] = Context.ToString();
 			query["title"] = Title.ToString();
@@ -36,7 +36,7 @@ namespace SteamWebAPI
 		/// <param name="Steamid">(Optional) steamid to make the request on behalf of -- if specified, the user must be in the session and all users being added to the session must be friends with the user.</param>
 		public static async void UserUpdateSession(ulong Sessionid, uint Appid, object Title, object Users, ulong Steamid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["sessionid"] = Sessionid.ToString();
 			query["appid"] = Appid.ToString();
 			query["title"] = Title.ToString();
@@ -53,7 +53,7 @@ namespace SteamWebAPI
 		/// <param name="Steamid">(Optional) steamid to make the request on behalf of -- if specified, the user must be in the session.</param>
 		public static async void UserDeleteSession(ulong Sessionid, uint Appid, ulong Steamid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["sessionid"] = Sessionid.ToString();
 			query["appid"] = Appid.ToString();
 			query["steamid"] = Steamid.ToString();

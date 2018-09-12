@@ -18,7 +18,7 @@ namespace SteamWebAPI
 		/// <param name="PlayerAccountID">An optional filter for a specific player</param>
 		public static async void GetFantasyPlayerStats(uint FantasyLeagueID, uint? StartTime = null, uint? EndTime = null, ulong? MatchID = null, uint? SeriesID = null, uint? PlayerAccountID = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["FantasyLeagueID"] = FantasyLeagueID.ToString();
 			if (StartTime != null)
 				query["StartTime"] = StartTime.ToString();
@@ -39,7 +39,7 @@ namespace SteamWebAPI
 		/// <param name="Accountid">The account ID to look up</param>
 		public static async void GetPlayerOfficialInfo(uint Accountid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["accountid"] = Accountid.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Fantasy_570", "GetPlayerOfficialInfo", 1, query);
 		}

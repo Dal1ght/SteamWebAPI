@@ -14,7 +14,7 @@ namespace SteamWebAPI
 		/// <param name="Promoid">The promo ID to grant an item for</param>
 		public static async void GetItemID(ulong Steamid, uint Promoid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["steamid"] = Steamid.ToString();
 			query["promoid"] = Promoid.ToString();
 			JObject response = await API.Instance.GetResponseAsync("ITFPromos_570", "GetItemID", 1, query);
@@ -27,7 +27,7 @@ namespace SteamWebAPI
 		/// <param name="Promoid">The promo ID to grant an item for</param>
 		public static async void GrantItem(ulong Steamid, uint Promoid)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["steamid"] = Steamid.ToString();
 			query["promoid"] = Promoid.ToString();
 			JObject response = await API.Instance.GetResponseAsync("ITFPromos_570", "GrantItem", 1, query);

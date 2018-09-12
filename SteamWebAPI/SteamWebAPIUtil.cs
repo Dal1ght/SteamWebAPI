@@ -12,7 +12,7 @@ namespace SteamWebAPI
 		/// </summary>
 		public static async void GetServerInfo()
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			JObject response = await API.Instance.GetResponseAsync("ISteamWebAPIUtil", "GetServerInfo", 1, query);
 		}
 
@@ -22,7 +22,7 @@ namespace SteamWebAPI
 		/// <param name="Key">access key</param>
 		public static async void GetSupportedAPIList(string Key = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (Key != null)
 				query["key"] = Key;
 			JObject response = await API.Instance.GetResponseAsync("ISteamWebAPIUtil", "GetSupportedAPIList", 1, query);

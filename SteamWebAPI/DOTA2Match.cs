@@ -17,7 +17,7 @@ namespace SteamWebAPI
 		/// </summary>
 		public static async Task<List<LeagueModel>> GetLeagueListing()
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Match_570", "GetLeagueListing", 1, query);
 			return JsonConvert.DeserializeObject<List<LeagueModel>>(response["result"]["leagues"].ToString(), API.SerializerSettings);
 		}
@@ -29,7 +29,7 @@ namespace SteamWebAPI
 		/// <param name="MatchId">Only show matches of the specified match id</param>
 		public static async Task<List<LiveLeagueGameModel>> GetLiveLeagueGames(uint? LeagueId = null, ulong? MatchId = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (LeagueId != null)
 				query["league_id"] = LeagueId.ToString();
 			if (MatchId != null)
@@ -46,7 +46,7 @@ namespace SteamWebAPI
 		/// <param name="IncludePersonaNames">Include persona names as part of the response</param>
 		public static async Task<DetailedMatchModel> GetMatchDetails(ulong MatchId, bool? IncludePersonaNames = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["match_id"] = MatchId.ToString();
 			if (IncludePersonaNames != null)
 				query["include_persona_names"] = IncludePersonaNames.ToString();
@@ -68,7 +68,7 @@ namespace SteamWebAPI
 		/// <param name="MatchesRequested">The number of requested matches to return</param>
 		public static async Task<MatchHistoryModel> GetMatchHistory(uint? HeroId = null, uint? GameMode = null, uint? Skill = null, string MinPlayers = null, string AccountId = null, string LeagueId = null, ulong? StartAtMatchId = null, string MatchesRequested = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (HeroId != null)
 				query["hero_id"] = HeroId.ToString();
 			if (GameMode != null)
@@ -96,7 +96,7 @@ namespace SteamWebAPI
 		/// <param name="MatchesRequested"></param>
 		public static async Task<MatchHistoryModel> GetMatchHistoryBySequenceNum(ulong? StartAtMatchSeqNum = null, uint? MatchesRequested = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (StartAtMatchSeqNum != null)
 				query["start_at_match_seq_num"] = StartAtMatchSeqNum.ToString();
 			if (MatchesRequested != null)
@@ -112,7 +112,7 @@ namespace SteamWebAPI
 		/// <param name="TeamsRequested"></param>
 		public static async void GetTeamInfoByTeamID(ulong? StartAtTeamId = null, uint? TeamsRequested = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (StartAtTeamId != null)
 				query["start_at_team_id"] = StartAtTeamId.ToString();
 			if (TeamsRequested != null)
@@ -126,7 +126,7 @@ namespace SteamWebAPI
 		/// <param name="Partner">Which partner's games to use.</param>
 		public static async void GetTopLiveEventGame(int Partner)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["partner"] = Partner.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Match_570", "GetTopLiveEventGame", 1, query);
 		}
@@ -137,7 +137,7 @@ namespace SteamWebAPI
 		/// <param name="Partner">Which partner's games to use.</param>
 		public static async void GetTopLiveGame(int Partner)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["partner"] = Partner.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IDOTA2Match_570", "GetTopLiveGame", 1, query);
 		}
@@ -149,7 +149,7 @@ namespace SteamWebAPI
 		/// <param name="HomeDivision">Prefer matches from this division.</param>
 		public static async void GetTopWeekendTourneyGames(int Partner, int? HomeDivision = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["partner"] = Partner.ToString();
 			if (HomeDivision != null)
 				query["home_division"] = HomeDivision.ToString();
@@ -167,7 +167,7 @@ namespace SteamWebAPI
 		/// <param name="PhaseId"></param>
 		public static async void GetTournamentPlayerStats(string AccountId, string LeagueId = null, string HeroId = null, string TimeFrame = null, ulong? MatchId = null, uint? PhaseId = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["account_id"] = AccountId;
 			if (LeagueId != null)
 				query["league_id"] = LeagueId;
@@ -193,7 +193,7 @@ namespace SteamWebAPI
 		/// <param name="PhaseId"></param>
 		public static async void GetTournamentPlayerStatsV2(string AccountId, string LeagueId = null, string HeroId = null, string TimeFrame = null, ulong? MatchId = null, uint? PhaseId = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["account_id"] = AccountId;
 			if (LeagueId != null)
 				query["league_id"] = LeagueId;

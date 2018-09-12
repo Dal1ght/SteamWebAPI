@@ -14,7 +14,7 @@ namespace SteamWebAPI
 		/// <param name="LeagueId">LeagueID to use if we aren't in a lobby</param>
 		public static async void GetBroadcasterInfo(ulong BroadcasterSteamId, uint? LeagueId = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["broadcaster_steam_id"] = BroadcasterSteamId.ToString();
 			if (LeagueId != null)
 				query["league_id"] = LeagueId.ToString();

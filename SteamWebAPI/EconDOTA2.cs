@@ -19,7 +19,7 @@ namespace SteamWebAPI
 		/// <param name="Language">The language to provide hero names in.</param>
 		public static async void GetEventStatsForAccount(uint Eventid, uint Accountid, string Language = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["eventid"] = Eventid.ToString();
 			query["accountid"] = Accountid.ToString();
 			if (Language != null)
@@ -33,7 +33,7 @@ namespace SteamWebAPI
 		/// <param name="Language">The language to provide item names in.</param>
 		public static async Task<List<GameItemModel>> GetGameItems(string Language = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (Language != null)
 				query["language"] = Language;
 			JObject response = await API.Instance.GetResponseAsync("IEconDOTA2_570", "GetGameItems", 1, query);
@@ -47,7 +47,7 @@ namespace SteamWebAPI
 		/// <param name="Itemizedonly">Return a list of itemized heroes only.</param>
 		public static async Task<List<HeroModel>> GetHeroes(bool? Itemizedonly = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (Itemizedonly != null)
 				query["itemizedonly"] = Itemizedonly.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IEconDOTA2_570", "GetHeroes", 1, query);
@@ -61,7 +61,7 @@ namespace SteamWebAPI
 		/// <param name="Icontype">The type of image you want. 0 = normal, 1 = large, 2 = ingame</param>
 		public static async void GetItemIconPath(string Iconname, uint? Icontype = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["iconname"] = Iconname;
 			if (Icontype != null)
 				query["icontype"] = Icontype.ToString();
@@ -74,7 +74,7 @@ namespace SteamWebAPI
 		/// <param name="Language">The language to provide rarity names in.</param>
 		public static async void GetRarities(string Language = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (Language != null)
 				query["language"] = Language;
 			JObject response = await API.Instance.GetResponseAsync("IEconDOTA2_570", "GetRarities", 1, query);
@@ -86,7 +86,7 @@ namespace SteamWebAPI
 		/// <param name="Leagueid">The ID of the league to get the prize pool of</param>
 		public static async void GetTournamentPrizePool(uint? Leagueid = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			if (Leagueid != null)
 				query["leagueid"] = Leagueid.ToString();
 			JObject response = await API.Instance.GetResponseAsync("IEconDOTA2_570", "GetTournamentPrizePool", 1, query);

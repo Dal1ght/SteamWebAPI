@@ -13,7 +13,7 @@ namespace SteamWebAPI
 		/// <param name="GameID">ID of game</param>
 		public static async void GetClientVersion(int GameID)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			JObject response = await API.Instance.GetResponseAsync($"IGCVersion_{GameID}", "GetClientVersion", 1, query);
 		}
 
@@ -23,7 +23,7 @@ namespace SteamWebAPI
 		/// <param name="GameID">ID of game</param>
 		public static async void GetServerVersion(int GameID)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			JObject response = await API.Instance.GetResponseAsync($"IGCVersion_{GameID}", "GetServerVersion", 1, query);
 		}
 	}

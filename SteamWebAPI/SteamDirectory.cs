@@ -14,7 +14,7 @@ namespace SteamWebAPI
 		/// <param name="Maxcount">Max number of servers to return</param>
 		public static async void GetCMList(uint Cellid, uint? Maxcount = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["cellid"] = Cellid.ToString();
 			if (Maxcount != null)
 				query["maxcount"] = Maxcount.ToString();
@@ -28,7 +28,7 @@ namespace SteamWebAPI
 		/// <param name="Maxcount">Max number of servers to return</param>
 		public static async void GetCSList(uint Cellid, uint? Maxcount = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["cellid"] = Cellid.ToString();
 			if (Maxcount != null)
 				query["maxcount"] = Maxcount.ToString();
@@ -40,7 +40,7 @@ namespace SteamWebAPI
 		/// </summary>
 		public static async void GetSteamPipeDomains()
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			JObject response = await API.Instance.GetResponseAsync("ISteamDirectory", "GetSteamPipeDomains", 1, query);
 		}
 	}

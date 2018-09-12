@@ -13,7 +13,7 @@ namespace SteamWebAPI
 		/// <param name="Publishedfileids">collection ids to get the details for</param>
 		public static async void GetCollectionDetails(ulong[] Publishedfileids)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["collectioncount"] = Publishedfileids.Length.ToString();
 			for (int i = 0; i < Publishedfileids.Length; ++i)
 			{
@@ -28,7 +28,7 @@ namespace SteamWebAPI
 		/// <param name="Publishedfileids">published file id to look up</param>
 		public static async void GetPublishedFileDetails(ulong[] Publishedfileids)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["itemcount"] = Publishedfileids.Length.ToString();
 			for (int i = 0; i < Publishedfileids.Length; ++i)
 			{
@@ -45,7 +45,7 @@ namespace SteamWebAPI
 		/// <param name="Steamid">If specified, only returns details if the file is owned by the SteamID specified</param>
 		public static async void GetUGCFileDetails(ulong Ugcid, uint Appid, ulong? Steamid = null)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["ugcid"] = Ugcid.ToString();
 			query["appid"] = Appid.ToString();
 			if (Steamid != null)

@@ -15,7 +15,7 @@ namespace SteamWebAPI
 		/// <param name="EncryptedLoginkey">Should be the users hashed loginkey, AES encrypted with the sessionkey.</param>
 		public static async void AuthenticateUser(ulong Steamid, byte[] Sessionkey, byte[] EncryptedLoginkey)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["steamid"] = Steamid.ToString();
 			query["sessionkey"] = Sessionkey.ToString();
 			query["encrypted_loginkey"] = EncryptedLoginkey.ToString();
@@ -30,7 +30,7 @@ namespace SteamWebAPI
 		/// <param name="Ticket">Ticket from GetAuthSessionTicket.</param>
 		public static async void AuthenticateUserTicket(string Key, uint Appid, string Ticket)
 		{
-			var query = new NameValueCollection();
+			var query = HttpUtility.ParseQueryString("");
 			query["key"] = Key;
 			query["appid"] = Appid.ToString();
 			query["ticket"] = Ticket;
