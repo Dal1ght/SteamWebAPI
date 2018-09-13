@@ -13,19 +13,18 @@ namespace SteamWebAPI
 	public static class SteamUser
 	{
 		/// <summary>
-		/// 
+		/// Returns the friend list of any Steam user, provided their Steam Community profile visibility is set to "Public".
 		/// </summary>
-		/// <param name="Key">access key</param>
 		/// <param name="Steamid">SteamID of user</param>
 		/// <param name="Relationship">relationship type (ex: friend)</param>
-		public static async void GetFriendList(string Key, ulong Steamid, string Relationship = null)
+		public static async Task<List<FriendModel>> GetFriendList(ulong Steamid, string Relationship = null)
 		{
 			var query = HttpUtility.ParseQueryString("");
-			query["key"] = Key;
 			query["steamid"] = Steamid.ToString();
 			if (Relationship != null)
 				query["relationship"] = Relationship;
 			JObject response = await API.Instance.GetResponseAsync("ISteamUser", "GetFriendList", 1, query);
+			return JsonConvert.DeserializeObject<List<FriendModel>>(response["friendslist"]["friends"].ToString(), API.SerializerSettings);
 		}
 		
 		/// <summary>
