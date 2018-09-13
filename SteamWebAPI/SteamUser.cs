@@ -92,19 +92,17 @@ namespace SteamWebAPI
 		}
 		
 		/// <summary>
-		/// 
+		/// Returns SteamID of player/group by name
 		/// </summary>
-		/// <param name="Key">access key</param>
 		/// <param name="Vanityurl">The vanity URL to get a SteamID for</param>
 		/// <param name="UrlType">The type of vanity URL. 1 (default): Individual profile, 2: Group, 3: Official game group</param>
-		public static async void ResolveVanityURL(string Key, string Vanityurl, int? UrlType = null)
+		public static async Task<long> ResolveVanityURL(string Vanityurl, int UrlType = 1)
 		{
 			var query = HttpUtility.ParseQueryString("");
-			query["key"] = Key;
 			query["vanityurl"] = Vanityurl;
-			if (UrlType != null)
-				query["url_type"] = UrlType.ToString();
+			query["url_type"] = UrlType.ToString();
 			JObject response = await API.Instance.GetResponseAsync("ISteamUser", "ResolveVanityURL", 1, query);
+			return JsonConvert.DeserializeObject<long>(response["response"]["steamid"].ToString(), API.SerializerSettings);
 		}
 	}
 }
